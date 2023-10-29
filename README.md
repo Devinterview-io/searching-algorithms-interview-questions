@@ -1,1136 +1,521 @@
-<div data-v-5e9078c0="" data-v-b06dc010="" class="QuestionsList">
+# ⚫ Searching in Tech Interviews 2024: 23 Must-Know Questions & Answers
 
-<div data-v-5e9078c0="">
+**Searching Algorithms** are techniques designed to locate specific items within a data set or determine the absence of such items. Examples include linear search and binary search. In coding interviews, questions on searching algorithms assess a candidate's understanding of **data retrieval** methods and their efficiency in various data structures and scenarios.
 
-# Top 24 Searching interview questions and answers in 2021.
+Check out our carefully selected list of **basic** and **advanced** Searching questions and answers to be well-prepared for your tech interviews in 2024.
 
-You can check all 24 Searching interview questions here 👉 https://devinterview.io/data/searching-interview-questions
+![Searching Decorative Image](https://storage.googleapis.com/dev-stack-app.appspot.com/blogImg/searching.png?GoogleAccessId=firebase-adminsdk-bgeaf%40dev-stack-app.iam.gserviceaccount.com&Expires=1698606560&Signature=aLXMglwh63UZAuw9nEtJ3ivsW%2Bf27kmI9V90Gzs41QARBAe3xzxNPj6vLdZdaCqrWtd8npHsl%2FAwNQZlkSrD%2FRxAt7JB58PAhyK8nUkJteMXTF9l%2BjVW5Ueo3L330LTA5gM0ufX3MvwMolRlku50erQHaxjO1qHNla6eoj3qCuxsAIigdl8zcCNUy4hYYY459%2FlX4LlHi1I0xoo6P0ATfIqGaIQ781Iw49h9qIe%2FjvwwZ20AwkKirYjmuvJi%2FAr9RHV9znJuwurNj5w%2FMFVaS4yS4IVs3tupGKE0CKN%2Bq0lLcvDNmORUQyZHgjDTdNpxwa3s6iJhkM8CTw0SjApnkA%3D%3D)
 
-<div data-v-5e9078c0="" class="unit">
+👉🏼 You can also find all answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-<div>
+---
 
-## 🔹 1\. Explain what is Linear (Sequential) Search and when may we use one?
+## 🔹 1. What is _Linear Search_ (Sequential Search)?
 
-</div>
+### Answer
 
-<div>
+**Linear Search**, also known as **Sequential Search**, is a straightforward and easy-to-understand search algorithm that works well for **small** and **unordered** datasets. However it might be inefficient for larger datasets.
 
-### Answer:
+### Steps of Linear Search
 
-<div class="answer">
+1. **Initialization**: Set the start of the list as the current position.
+2. **Comparison/Match**: Compare the current element to the target. If they match, you've found your element.
+3. **Iteration**: Move to the next element in the list and repeat the Comparison/Match step. If no match is found and there are no more elements, the search concludes.
 
-<div>
+### Complexity Analysis
 
-<div>
+- **Time Complexity**: $O(n)$ In the worst-case scenario, when the target element is either the last element or not in the array, the algorithm will make $n$ comparisons, where $n$ is the length of the array.
 
-<div class="AnswerBody">
+- **Space Complexity**: $O(1)$ Uses constant extra space
 
-**Linear (sequential) search** goes through all possible elements in some array and compare each one with the desired element. It may take up to `_O_(_n_)` operations, where N is the size of an array and is widely considered to be horribly slow. In linear search when you perform one operation you reduce the size of the problem _by one_ (when you do one operation in binary search you reduce the size of the problem _by half_). Despite it, it can still be used when:
+### Code Example: Linear Search
 
-*   You need to perform this search only once,
-*   You are _forbidden_ to rearrange the elements and you do not have any extra memory,
-*   The array is tiny, such as ten elements or less, or the performance is not an issue at all,
-*   Even though in theory other search algorithms may be faster than linear search (for instance binary search), in practice even on medium-sized arrays (around 100 items or less) it might be infeasible to use anything else. On larger arrays, it only makes sense to use other, faster search methods if the data is large enough, because the initial time to prepare (sort) the data is comparable to many linear searches,
-*   When the list items are arranged in order of _decreasing probability_, and these probabilities are geometrically distributed, the cost of linear search is only `_O_(_1_)`
-*   You have no idea what you are searching.
+Here is the Python code:
 
-When you ask MySQL something like `SELECT x FROM y WHERE z = t`, and `z` is a column _without_ an index, linear search is performed with all the consequences of it. This is why adding an index to _searchable_ columns is important.
+```python
+def linear_search(arr, target):
+    for i, val in enumerate(arr):
+        if val == target:
+            return i  # Found, return index
+    return -1  # Not found, return -1
 
-</div>
+# Example usage
+my_list = [4, 2, 6, 8, 10, 1]
+target_value = 8
+result_index = linear_search(my_list, target_value)
+print(f"Target value found at index: {result_index}")
+```
 
-</div>
+### Practical Applications
 
-<div>
+1. **One-time search**: When you're searching just once, more complex algorithms like binary search might be overkill because of their setup needs.
+2. **Memory efficiency**: Without the need for extra data structures, linear search is a fit for environments with memory limitations.
+3. **Small datasets**: For limited data, a linear search is often speedy enough. Even for sorted data, it might outpace more advanced search methods.
+4. **Dynamic unsorted data**: For datasets that are continuously updated and unsorted, maintaining order for other search methods can be counterproductive.
+5. **Database queries**: In real-world databases, an SQL query lacking the right index may resort to linear search, emphasizing the importance of proper indexing.
 
-<div class="mb-2 mt-2"><span class="h5">Complexity Analysis</span></div>
+---
 
-<div class="hide-small">
+## 🔹 2. Name some _Optimization Techniques_ for _Linear Search_.
 
-<div class="row no-gutters my-2 align-items-end">
+### Answer
 
-<div class="col font-weight-bold text-muted">Time:</div>
+**Linear Search** is a simple searching technique. However, its efficiency can decrease with larger datasets. Let's explore techniques to enhance its performance.
 
-<div class="col disable text-center">
+### Linear Search Optimization Techniques
 
-<div class="text-muted font-weight-bold justify-content-center">Constant</div>
+#### Early Exit
 
-<div class="complexity amazing first p-1 justify-content-center shadow-text">O(1)</div>
+- **Description**: Stop the search as soon as the target is found.
+- **How-To**: Use a `break` or `return` statement to exit the loop upon finding the target.
 
-</div>
+```python
+   def linear_search_early_exit(lst, target):
+       for item in lst:
+           if item == target:
+               return True
+       return False
+```
 
-<div class="col disable text-center">
+#### Bidirectional Search
 
-<div class="text-muted font-weight-bold justify-content-center">Dbl. Logarithmic</div>
+- **Description**: Search from both ends of the list simultaneously.
+- **How-To**: Use two pointers, one starting at the beginning and the other at the end. Move them towards each other, until they meet or find the target.
 
-<div class="complexity good p-1 justify-content-center shadow-text">O(log log n)</div>
+```python
+   def bidirectional_search(lst, target):
+       left, right = 0, len(lst) - 1
+       while left <= right:
+           if lst[left] == target or lst[right] == target:
+               return True
+           left += 1
+           right -= 1
+       return False
+```
 
-</div>
+#### Skip Search & Search by Blocks
 
-<div class="col disable text-center">
+- **Description**: Bypass certain elements to reduce search time.
+- **How-To**: In sorted lists, skip sections based on element values or check every $n$th element.
 
-<div class="text-muted font-weight-bold justify-content-center">Logarithmic</div>
+```python
+   def skip_search(lst, target, n=3):
+       length = len(lst)
+       for i in range(0, length, n):
+           if lst[i] == target:
+               return True
+           elif lst[i] > target:
+               return target in lst[i-n:i]
+       return False
+```
 
-<div class="complexity good p-1 justify-content-center shadow-text">O(log n)</div>
+#### Positional Adjustments
 
-</div>
+- **Description**: Reorder the list based on element access frequency.
+- **Techniques**:
+     - Transposition: Move frequently accessed elements forward.
+     - Move to Front (MTF): Place high-frequency items at the start.
+     - Move to End (MTE): Shift rarely accessed items towards the end.
+
+```python
+   def mtf(lst, target):
+       for idx, item in enumerate(lst):
+           if item == target:
+               lst.pop(idx)
+               lst.insert(0, item)
+               return True
+       return False
+```
 
-<div class="col disable text-center">
+#### Indexing
 
-<div class="font-weight-bold  text-muted justify-content-center">Square Root</div>
+- **Description**: Build an index for faster lookups.
+- **How-To**: Pre-process the list to create an index linking elements to positions.
 
-<div class="complexity fair p-1 justify-content-center shadow-text ">O(√n)</div>
+```python
+   def create_index(lst):
+       return {item: idx for idx, item in enumerate(lst)}
+   
+   index = create_index(my_list)
+   def search_with_index(index, target):
+       return target in index
+```
 
-</div>
+#### Parallelism
 
-<div class="col text-center">
+- **Description**: Exploit multi-core systems to speed up the search.
+- **How-To**: Split the list into chunks and search each using multiple cores.
 
-<div class="font-weight-bold  text-muted justify-content-center">Linear</div>
+```python
+   from concurrent.futures import ProcessPoolExecutor
 
-<div class="complexity fair p-1 justify-content-center shadow-text selected-complexity effect7">O(n)</div>
+   def search_chunk(chunk, target):
+       return target in chunk
 
-</div>
+   def parallel_search(lst, target):
+       chunks = [lst[i::4] for i in range(4)]
+       with ProcessPoolExecutor() as executor:
+           results = list(executor.map(search_chunk, chunks, [target]*4))
+       return any(results)
+```
 
-<div class="col disable text-center">
+---
 
-<div class="font-weight-bold text-muted justify-content-center">Linearithmic</div>
+## 🔹 3. What is _Sentinel Search_?
 
-<div class="complexity bad p-1 justify-content-center shadow-text ">O(n log n)</div>
+### Answer
 
-</div>
+**Sentinel Search**, sometimes referred to as **Move-to-Front Search** or **Self-Organizing Search**, is a variation of the linear search that optimizes search performance for frequently accessed elements.
 
-<div class="col disable text-center">
+### Core Principle
 
-<div class="font-weight-bold  text-muted justify-content-center">Quadratic</div>
+Sentinel Search improves efficiency by:
 
-<div class="complexity terrible p-1 justify-content-center shadow-text ">_O_(_n_<sup>2</sup>)</div>
+- Adding a "**sentinel**" to the list to guarantee a stopping point, removing the need for checking array bounds.
+- Rearranging elements by moving found items closer to the front over time, making future searches for the same items faster.
 
-</div>
+### Sentinel Search Algorithm
 
-<div class="col disable text-center">
+1. **Append Sentinel**: 
+   - Add the target item as a sentinel at the list's end. This ensures the search always stops.
+  
+2. **Execute Search**: 
+   - Start from the first item and progress until the target or sentinel is reached.
+   - If the target is found before reaching the sentinel, optionally move it one position closer to the list's front to improve subsequent searches.
 
-<div class="font-weight-bold   text-muted justify-content-center">Exponential</div>
+### Complexity Analysis
 
-<div class="complexity terrible p-1 justify-content-center shadow-text ">_O_(_2_<sup>n</sup>)</div>
+- **Time Complexity**: Remains $O(n)$, reflecting the potential need to scan the entire list.
+- **Space Complexity**: $O(1)$, indicating constant extra space use.
 
-</div>
+### Code Example: Sentinel Search
 
-<div class="col disable text-center">
+Here is the Python code:
 
-<div class="font-weight-bold text-muted">Factorial</div>
+```python
+def sentinel_search(arr, target):
+    # Append the sentinel
+    arr.append(target)
+    i = 0
 
-<div class="complexity terrible last p-1 justify-content-center shadow-text ">O(n!)</div>
+    # Execute the search
+    while arr[i] != target:
+        i += 1
 
-</div>
+    # If target is found (before sentinel), move it closer to the front
+    if i < len(arr) - 1:
+        arr[i], arr[max(i - 1, 0)] = arr[max(i - 1, 0)], arr[i]
+        return i
 
-</div>
+    # If only the sentinel is reached, the target is not in the list
+    return -1
 
-</div>
+# Demonstration
+arr = [1, 2, 3, 4, 5]
+target = 3
+index = sentinel_search(arr, target)
+print(f"Target found at index {index}")  # Expected Output: Target found at index 1
+```
 
-<div class="hide-small">
+---
 
-<div class="row no-gutters my-2 align-items-end">
+## 🔹 4. What are the _Drawbacks_ of _Sentinel Search_?
 
-<div class="col font-weight-bold text-muted">Space:</div>
+### Answer
 
-<div class="col text-center">
+The **Sentinel Linear Search** slightly improves efficiency over the standard method by reducing average comparisons from roughly $2n$ to $n + 2$ using a sentinel value.
 
-<div class="text-muted font-weight-bold justify-content-center">Constant</div>
+However, both approaches share an $O(n)$ worst-case time complexity. Despite its advantages, the Sentinel Search has several drawbacks.
 
-<div class="complexity amazing first p-1 justify-content-center shadow-text selected-complexity effect7">O(1)</div>
+### Drawbacks of Sentinel Search
 
-</div>
+1. **Data Safety Concerns**: Using a sentinel can introduce risks, especially when dealing with shared or read-only arrays. It might inadvertently alter data or cause access violations.
 
-<div class="col disable text-center">
+2. **List Integrity**: Sentinel search necessitates modifying the list to insert the sentinel. This alteration can be undesirable in scenarios where preserving the original list is crucial.
 
-<div class="text-muted font-weight-bold justify-content-center">Dbl. Logarithmic</div>
+3. **Limited Applicability**: The sentinel approach is suitable for data structures that support expansion, such as dynamic arrays or linked lists. For static arrays, which don't allow resizing, this method isn't feasible.
 
-<div class="complexity good p-1 justify-content-center shadow-text">O(log log n)</div>
+4. **Compiler Variability**: Some modern compilers optimize boundary checks, which could reduce or negate the efficiency gains from using a sentinel.
 
-</div>
+5. **Sparse Data Inefficiency**: In cases where the sentinel's position gets frequently replaced by genuine data elements, the method can lead to many unnecessary checks, diminishing its effectiveness.
 
-<div class="col disable text-center">
+6. **Code Complexity vs. Efficiency**: The marginal efficiency boost from the sentinel method might not always justify the added complexity, especially when considering code readability and maintainability.
 
-<div class="text-muted font-weight-bold justify-content-center">Logarithmic</div>
+---
 
-<div class="complexity good p-1 justify-content-center shadow-text">O(log n)</div>
+## 🔹 5. Explain what is _Binary Search_.
 
-</div>
+### Answer
 
-<div class="col disable text-center">
+**Binary Search** is a highly efficient searching algorithm often implemented for **already-sorted lists**, reducing the search space by 50% at every step. This method is especially useful when the list won't be modified frequently.
 
-<div class="font-weight-bold  text-muted justify-content-center">Square Root</div>
+### Binary Search Algorithm
 
-<div class="complexity fair p-1 justify-content-center shadow-text ">O(√n)</div>
+1. **Initialize**: Point to the start (`low`) and end (`high`) of the list.
+2. **Compare and Divide**: Calculate the midpoint (`mid`), compare the target with the element at `mid`, and adjust the search range accordingly.
+3. **Repeat**: Repeat the above step until the target is found or the search range is exhausted.
 
-</div>
+### Visual Representation
 
-<div class="col disable text-center">
+![Binary Search](https://firebasestorage.googleapis.com/v0/b/dev-stack-app.appspot.com/o/searching%2Fbinary-search-main.gif?alt=media&token=7ec5991e-37dd-4bed-b5fa-cc24b3f637ae&_gl=1*1n62otv*_ga*OTYzMjY5NTkwLjE2ODg4NDM4Njg.*_ga_CW55HF8NVT*MTY5NjI0NDc2Ny4xMzYuMS4xNjk2MjQ1MDYwLjU0LjAuMA..)
 
-<div class="font-weight-bold  text-muted justify-content-center">Linear</div>
+### Complexity Analysis
 
-<div class="complexity fair p-1 justify-content-center shadow-text ">O(n)</div>
+- **Time Complexity**: $O(\log n)$. Each iteration reduces the search space in half, resulting in a logarithmic time complexity. 
 
-</div>
+- **Space Complexity**: $O(1)$. Constant space is required as the algorithm operates on the original list and uses only a few extra variables.
 
-<div class="col disable text-center">
+### Code Example: Binary Search
 
-<div class="font-weight-bold text-muted justify-content-center">Linearithmic</div>
+Here is the Python code:
 
-<div class="complexity bad p-1 justify-content-center shadow-text ">O(n log n)</div>
+```python
+def binary_search(arr, target):
+    low, high = 0, len(arr) - 1
+    
+    while low <= high:
+        mid = (low + high) // 2  # Calculate the midpoint
+        
+        if arr[mid] == target:  # Found the target
+            return mid
+        elif arr[mid] < target:  # Target is in the upper half
+            low = mid + 1
+        else:  # Target is in the lower half
+            high = mid - 1
+    
+    return -1  # Target not found
+```
 
-</div>
+### Binary Search Variations
 
-<div class="col disable text-center">
+- **Iterative**: As shown in the code example above, this method uses loops to repeatedly divide the search range.
+- **Recursive**: Can be useful in certain scenarios, with the added benefit of being more concise but potentially less efficient due to the overhead of function calls and stack usage.
 
-<div class="font-weight-bold   text-muted justify-content-center">Quadratic</div>
+### Practical Applications
 
-<div class="complexity terrible p-1 justify-content-center shadow-text ">_O_(_n_<sup>2</sup>)</div>
+1. **Databases**: Enhances query performance in sorted databases and improves the efficiency of sorted indexes.
+2. **Search Engines**: Quickly retrieves results from vast directories of keywords or URLs.
+3. **Version Control**: Tools like 'Git' pinpoint code changes or bugs using binary search.
+4. **Optimization Problems**: Useful in algorithmic challenges to optimize solutions or verify conditions.
+5. **Real-time Systems**: Critical for timely operations in areas like air traffic control or automated trading.
+6. **Programming Libraries**: Commonly used in standard libraries for search and sort functions.
 
-</div>
+---
 
-<div class="col disable text-center">
+## 🔹 6. Explain why complexity of _Binary Search_ is _O(log n)_.
 
-<div class="font-weight-bold   text-muted justify-content-center">Exponential</div>
+### Answer
 
-<div class="complexity terrible p-1 justify-content-center shadow-text ">_O_(_2_<sup>n</sup>)</div>
+The **Binary Search** algorithm is known for its efficiency, often completing in $O(\log n)$—also known as **logarithmic**—time.
 
-</div>
+### Mathematical Background
 
-<div class="col disable text-center">
+To understand why $x = \log_2 N$ yields $O(\log n)$, consider the following:
 
-<div class="font-weight-bold text-muted">Factorial</div>
+- $N = 2^x$: Each halving step $x$ corresponds to $N$ reductions by a factor of 2.
+- Taking the logarithm of both sides with base 2, we find $x = \log_2 N$, which is equivalent to $\log N$ in base-2 notation.
 
-<div class="complexity terrible last p-1 justify-content-center shadow-text ">O(n!)</div>
+Therefore, with each step, the algorithm roughly reduces the search space in **half**, leading to a **logarithmic time** complexity.
 
-</div>
+### Visual Representation
 
-</div>
+![Binary Search Graphical Representation](https://i.stack.imgur.com/spHFh.png)
 
-</div>
+---
 
-<div class="hide-large">
+## 🔹 7. Compare _Recursive_ vs. _Iterative Binary Search_.
 
-**Time:** <mark>O(n)</mark>
+### Answer
 
-**Space:** <mark>O(1)</mark>
+Both **Recursive** and **Iterative** Binary Search leverage the **divide-and-conquer** strategy to search through sorted data. Let's look at their differences in implementation.
 
-</div>
+### Complexity Comparison
 
-<div class="mt-3">
+- **Time Complexity**: $O(\log n)$ for both iterative and recursive approaches, attributed to halving the search space each iteration.
+- **Space Complexity**:
+  - Iterative: Uses constant $O(1)$ space, free from function call overhead.
+  - Recursive: Typically $O(\log n)$ because of stack memory from function calls. This can be reduced to $O(1)$ with tail recursion, but support varies across compilers.
 
-<div>
+### Considerations
 
-<div class="AnswerBody">
+- **Simplicity**: Iterative approaches are often more intuitive to implement.
+- **Memory**: Recursive methods might consume more memory due to their reliance on the function call stack.
+- **Compiler Dependency**: Tail recursion optimization isn't universally supported.
 
-*   A linear search runs in at worst _linear time_ and makes at most `n` comparisons, where `n` is the length of the list. If each element is _equally likely_ to be searched, then linear search has an average case of `(n+1)/2` comparisons, but the average case can be affected if the search probabilities for each element vary.
-*   When the list items are arranged in order of _decreasing probability_, and these probabilities are geometrically distributed, the cost of linear search is only `_O_(_1_)`
+### Code Example: Iterative Binary Search
 
-</div>
+Here is the Python code:
 
-</div>
+```python
+def binary_search_iterative(arr, target):
+    low, high = 0, len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
 
-</div>
+# Test
+array = [1, 3, 5, 7, 9, 11]
+print(binary_search_iterative(array, 7))  # Output: 3
+```
 
-</div>
+### Code Example: Recursive Binary Search
 
-<div style="font-size: 14px;">
+Here is the Python code:
 
-<div class="mb-3 mt-2"><span class="h5">Implementation</span></div>
+```python
+def binary_search_recursive(arr, target, low=0, high=None):
+    if high is None:
+        high = len(arr) - 1
 
-<div>
+    if low > high:
+        return -1
 
+    mid = (low + high) // 2
 
+    if arr[mid] == target:
+        return mid
+    elif arr[mid] < target:
+        return binary_search_recursive(arr, target, mid + 1, high)
+    else:
+        return binary_search_recursive(arr, target, low, mid - 1)
 
-</div>
+# Test
+array = [1, 3, 5, 7, 9, 11]
+print(binary_search_recursive(array, 7))  # Output: 3
+```
 
-</div>
+---
+## 🔹 8. In _Binary Search_, why _Round Down_ the midpoint instead of _Rounding Up_?
 
-</nav>
+### Answer
 
-</div>
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-<div class="mt-2">
+---
 
-<div class="AnswerBody">
+## 🔹 9. Compare _Binary Search_ vs. _Linear Search_.
 
-    function linearSearch(array, toFind){
-      for(let i = 0; i < array.length; i++){
-        if(array[i] === toFind) return i;
-      }
-      return -1;
-    }
+### Answer
 
-</div>
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-</div>
+---
 
-</div>
+## 🔹 10. What is _Interpolation Search_?
 
-<div class="row my-2">
+### Answer
 
-<div><span>Source: <span>bytescout.com https://bytescout.com/blog/search-algorithms-in-modern-applications.html "Explain what is Linear (Sequential) Search and when may we use one? Interview Questions Source To Answer"</span></span>   </div>
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-</div>
+---
 
-</div>
+## 🔹 11. Provide an example where _Interpolation Search_ is less efficient than _Binary Search_.
 
-</div>
+### Answer
 
-</div>
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-</div>
+---
 
-<div data-v-5e9078c0="" class="unit">
+## 🔹 12. What is _Jump Search_ (Block Search) technique?
 
-<div>
+### Answer
 
-## 🔹 2\. Explain what is Binary Search
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-</div>
+---
 
-<div>
+## 🔹 13. Explain the rationale behind choosing the _Optimal Block Size_ for _Jump Search_.
 
-### Answer:
+### Answer
 
-<div class="answer">
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-<div>
+---
 
-<div>
+## 🔹 14. When _Jump Search_ is preferable over _Binary Search_?
 
-<div class="AnswerBody">
+### Answer
 
-When the list is **sorted** we can use the **binary search** (also known as half-interval search, logarithmic search, or binary chop) technique to find items on the list. Here's a step-by-step description of using binary search:
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-1.  Let `min = 1` and `max = n`.
-2.  Guess the average of `max` and `min` **rounded down** so that it is an integer.
-3.  If you guessed the number, stop. You found it!
-4.  If the guess was too low, set _min_ to be one larger than the guess.
-5.  If the guess was too high, set _max_ to be one smaller than the guess.
-6.  Go back to step two.
+---
 
-In this example we looking for array item with value `4`:
+## 🔹 15. What is _Ternary Search_?
 
-When you do one operation in binary search we reduce the size of the problem **by half** (look at the picture below how do we reduce the size of the problem area) hence the complexity of binary search is `_O_(_log n_)`. The binary search algorithm can be written either _recursively_ or _iteratively_.
+### Answer
 
-</div>
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-</div>
+---
 
-<div>
+## 🔹 16. What are the advantages of _Binary Search_ over _Ternary Search_?
 
-<div class="mb-2 mt-2"><span class="h5">Complexity Analysis</span></div>
+### Answer
 
-<div class="hide-small">
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-<div class="row no-gutters my-2 align-items-end">
+---
 
-<div class="col font-weight-bold text-muted">Time:</div>
+## 🔹 17. Explain the _Breadth-First Search (BFS) traversing method.
 
-<div class="col disable text-center">
+### Answer
 
-<div class="text-muted font-weight-bold justify-content-center">Constant</div>
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-<div class="complexity amazing first p-1 justify-content-center shadow-text">O(1)</div>
+---
 
-</div>
+## 🔹 18. Explain the _Depth-First Search_ algorithm.
 
-<div class="col disable text-center">
+### Answer
 
-<div class="text-muted font-weight-bold justify-content-center">Dbl. Logarithmic</div>
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-<div class="complexity good p-1 justify-content-center shadow-text">O(log log n)</div>
+---
 
-</div>
+## 🔹 19. What is _Exponential Search_ (Doubling/Galloping)?
 
-<div class="col text-center">
+### Answer
 
-<div class="text-muted font-weight-bold justify-content-center">Logarithmic</div>
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-<div class="complexity good p-1 justify-content-center shadow-text selected-complexity effect7">O(log n)</div>
+---
 
-</div>
+## 🔹 20. Explain the rationale behind using _Binary Search_ on a _Doubly Linked List_.
 
-<div class="col disable text-center">
+### Answer
 
-<div class="font-weight-bold  text-muted justify-content-center">Square Root</div>
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-<div class="complexity fair p-1 justify-content-center shadow-text ">O(√n)</div>
+---
 
-</div>
+## 🔹 21. Explain what is _Fibonacci Search Technique_.
 
-<div class="col disable text-center">
+### Answer
 
-<div class="font-weight-bold  text-muted justify-content-center">Linear</div>
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-<div class="complexity fair p-1 justify-content-center shadow-text ">O(n)</div>
+---
 
-</div>
+## 🔹 22. Identify potential issues in this _Recursive Binary Search_ implementation.
 
-<div class="col disable text-center">
+### Answer
 
-<div class="font-weight-bold text-muted justify-content-center">Linearithmic</div>
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-<div class="complexity bad p-1 justify-content-center shadow-text ">O(n log n)</div>
+---
 
-</div>
+## 🔹 23. Choose _The Fastest Algorithm_ for the given scenario.
 
-<div class="col disable text-center">
+### Answer
 
-<div class="font-weight-bold  text-muted justify-content-center">Quadratic</div>
+👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
-<div class="complexity terrible p-1 justify-content-center shadow-text ">_O_(_n_<sup>2</sup>)</div>
+---
 
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold   text-muted justify-content-center">Exponential</div>
-
-<div class="complexity terrible p-1 justify-content-center shadow-text ">_O_(_2_<sup>n</sup>)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold text-muted">Factorial</div>
-
-<div class="complexity terrible last p-1 justify-content-center shadow-text ">O(n!)</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="hide-small">
-
-<div class="row no-gutters my-2 align-items-end">
-
-<div class="col font-weight-bold text-muted">Space:</div>
-
-<div class="col text-center">
-
-<div class="text-muted font-weight-bold justify-content-center">Constant</div>
-
-<div class="complexity amazing first p-1 justify-content-center shadow-text selected-complexity effect7">O(1)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="text-muted font-weight-bold justify-content-center">Dbl. Logarithmic</div>
-
-<div class="complexity good p-1 justify-content-center shadow-text">O(log log n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="text-muted font-weight-bold justify-content-center">Logarithmic</div>
-
-<div class="complexity good p-1 justify-content-center shadow-text">O(log n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold  text-muted justify-content-center">Square Root</div>
-
-<div class="complexity fair p-1 justify-content-center shadow-text ">O(√n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold  text-muted justify-content-center">Linear</div>
-
-<div class="complexity fair p-1 justify-content-center shadow-text ">O(n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold text-muted justify-content-center">Linearithmic</div>
-
-<div class="complexity bad p-1 justify-content-center shadow-text ">O(n log n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold   text-muted justify-content-center">Quadratic</div>
-
-<div class="complexity terrible p-1 justify-content-center shadow-text ">_O_(_n_<sup>2</sup>)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold   text-muted justify-content-center">Exponential</div>
-
-<div class="complexity terrible p-1 justify-content-center shadow-text ">_O_(_2_<sup>n</sup>)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold text-muted">Factorial</div>
-
-<div class="complexity terrible last p-1 justify-content-center shadow-text ">O(n!)</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="hide-large">
-
-**Time:** <mark>O(log n)</mark>
-
-**Space:** <mark>O(1)</mark>
-
-</div>
-
-</div>
-
-<div style="font-size: 14px;">
-
-<div class="mb-3 mt-2"><span class="h5">Implementation</span></div>
-
-<div>
-
-<nav class="mdc-tab-bar">
-
-<div class="mdc-tab-scroller">
-
-<div class="mdc-tab-scroller__scroll-area mdc-tab-scroller__scroll-area--scroll" style="margin-bottom: 0px;">
-
-<div class="mdc-tab-scroller__scroll-content"><button class="mdc-ripple-upgraded mdc-ripple-upgraded--background-focused mdc-tab mdc-tab--min-width mdc-tab--active" aria-selected="true" tabindex="0">
-
-<div class="mdc-tab__content"><span class="mdc-tab__text-label"><span>JavaScript</span> <span class="shadow-text lang-badge js">JS</span></span></div>
-
-<span class="mdc-tab-indicator mdc-tab-indicator--active"><span aria-hidden="true" class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span></span></button><button class="mdc-ripple-upgraded mdc-tab mdc-tab--min-width">
-
-<div class="mdc-tab__content"><span class="mdc-tab__text-label"><span>Java</span> <span class="shadow-text lang-badge java">Java</span></span></div>
-
-<span class="mdc-tab-indicator"><span aria-hidden="true" class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span></span></button><button class="mdc-ripple-upgraded mdc-tab mdc-tab--min-width">
-
-<div class="mdc-tab__content"><span class="mdc-tab__text-label"><span>Python</span> <span class="shadow-text lang-badge py">PY</span></span></div>
-
-<span class="mdc-tab-indicator"><span aria-hidden="true" class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span></span></button></div>
-
-</div>
-
-</div>
-
-</nav>
-
-</div>
-
-<div class="mt-2">
-
-<div class="AnswerBody">
-
-    var binarySearch = function(array, value) {
-        var guess,
-            min = 0,
-            max = array.length - 1;	
-
-        while(min <= max){
-            guess = Math.floor((min + max) /2);
-    	if(array[guess] === value)
-    	    return guess;
-    	else if(array[guess] < value)
-    	    min = guess + 1;
-    	else
-    	    max = guess - 1;	
-         }
-
-         return -1;
-    }
-
-</div>
-
-</div>
-
-</div>
-
-<div class="row my-2">
-
-<div><span>Source: <span>www.tutorialspoint.com https://www.tutorialspoint.com/Binary-Search "Explain what is Binary Search Interview Questions Source To Answer"</span></span>   </div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 3\. What is an example of Interpolation Search being slower than Binary Search?
-
-</div>
-
-<div>
-
-### Answer:
-
-<div class="answer">
-
-<div>
-
-<div class="mb-2"><span class="h5">Problem</span></div>
-
-<div>
-
-<div class="AnswerBody">
-
-I understand that interpolation search not only requires a sorted list but also uniformly distributed. Provide an understandable situation where Interpolation search is slower than binary search.
-
-</div>
-
-</div>
-
-<div>
-
-<div class="AnswerBody">
-
-If we assume _uniform distribution_ of the values so we'll use simple linear interpolation. So if the values are:
-
-    1,2,3,4,5,6,7,8,9,10000000
-
-And we search for number `9`, searching using linear interpolation will go through all (excluding the first and last) the indices before finding the correct one. In such cases interpolation search will be `_O_(_n_)`.
-
-</div>
-
-</div>
-
-<div class="row my-2">
-
-<div><span>Source: <span>stackoverflow.com https://stackoverflow.com/questions/41877002/what-is-an-example-of-interpolation-search-being-slower-than-binary-search "What is an example of Interpolation Search being slower than Binary Search? Interview Questions Source To Answer"</span></span>   </div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 4\. Explain some Linear Search optimization techniques
-
-</div>
-
-<div>
-
-### Answer:
-
-<div class="answer">
-
-<div>
-
-<div>
-
-<div class="AnswerBody">
-
-If the elements you would be searching in a list are NOT uniformly distributed, then you could do certain optimizations that can help you improve the efficiency of your search algorithms. For such improvements to be effective, you do need to know the characteristics of the data being searched, the frequency and also the fact that the underlying collection needs to be modifiable.
-
-1.  Most used pattern: If the likelihood of the current element being searched again is high, then move if from it's current location (say position i) to the front of the collection (say position 0). This does require moving elements from `A[0, i-1] to A[1, i]` to accommodate the new element at `A[0]`.
-2.  The disadvantage of the above pattern is that it requires a lot of movement. One quick strategy is to move an element up on success by simply swapping the target element from position `x` with the first element at position `0`. This eventually results in a similar pattern as the frequently searched elements bubble up to the top of the list.
-3.  On the other end of the spectrum, if an element is unlikely to be search again, then moving it to the end on find improves the chances of the other elements being searched.
-
-</div>
-
-</div>
-
-<div class="row my-2">
-
-<div><span>Source: <span>hoven-in.appspot.com https://hoven-in.appspot.com/Home/Data-Structures/Data-Structure-Interview-Questions/interview-questions-on-linear-search-01.html "Explain some Linear Search optimization techniques Interview Questions Source To Answer"</span></span>   </div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 5\. Recursive and Iterative Binary Search: Which one is more efficient and why?
-
-</div>
-
-<div>
-
-### Answer:
-
-<div class="answer">
-
-<div>
-
-<div>
-
-<div class="AnswerBody">
-
-*   With regard to **time complexity**, recursive and iterative methods both will give you `_O_(_log n_)` time complexity, with regard to input size, provided you implement correct binary search logic.
-*   Focusing on **space complexity**:
-    *   The iterative approach is more efficient since we are allocating a constant amount `O(1)` of space for the function call and constant space for variable allocations.
-    *   There have been concerns around the recursive version regarding the function stack it is going to use. However, once you see it carefully, the recursive version is a **tail recursion**. Most of the modern compiler converts the tail recursion into iterative program. Thus, there won't be any issue regarding the usage of the function stack.
-
-**P.S.** A **tail recursion** is also a kind of recursion but it will make the return value of the recursion call as the last statement of the method. This will make the calculation occurs _before_ the recursion call and hence there is _no need to keep the stack to store the intermediate value_ when it moves to the next recursive call.
-
-</div>
-
-</div>
-
-<div class="row my-2">
-
-<div><span>Source: <span>stackoverflow.com https://stackoverflow.com/questions/57481997/recursive-and-iterative-binary-search-which-one-is-more-efficient-and-why "Recursive and Iterative Binary Search: Which one is more efficient and why? Interview Questions Source To Answer"</span></span>   </div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 6\. Explain what is Interpolation Search
-
-</div>
-
-<div>
-
-### Answer:
-
-<div class="answer">
-
-<div>
-
-<div>
-
-<div class="AnswerBody">
-
-**Interpolation Search** is an algorithm similar to **Binary Search** for searching for a given target value in a sorted array. It is an improvement over Binary Search for instances, where the values in a sorted array are _uniformly distributed_.
-
-The binary search always chooses the middle of the remaining search space. On a contrast Interpolation search, at each search step, calculates (using **interpolation formula**) where in the remaining search space the target _might be present_, based on the **low** and **high** values of the search space and the value of the target. For example, if the value of the key is closer to the last element, interpolation search is likely to start search toward the end side. The value actually found at this estimated position is then compared to the target value. If it is not equal, then depending on the comparison, the remaining search space is reduced to the part before or after the estimated position.
-
-The idea of the **interpolation formula** or **partitioning logic** is to return higher value of `pos` when element to be searched is closer to `arr[hi]`. And smaller value when closer to `arr[low].`
-
-    arr[] ==> Array where elements need to be searched
-    x     ==> Element to be searched
-    low   ==> Starting index in arr[]
-    hi    ==> Ending index in arr[]
-
-    pos = low + [ (x-arr[low])*(hi-low) / (arr[hi]-arr[Low]) ]
-
-</div>
-
-</div>
-
-<div>
-
-<div class="mb-2 mt-2"><span class="h5">Complexity Analysis</span></div>
-
-<div class="hide-small">
-
-<div class="row no-gutters my-2 align-items-end">
-
-<div class="col font-weight-bold text-muted">Time:</div>
-
-<div class="col disable text-center">
-
-<div class="text-muted font-weight-bold justify-content-center">Constant</div>
-
-<div class="complexity amazing first p-1 justify-content-center shadow-text">O(1)</div>
-
-</div>
-
-<div class="col text-center">
-
-<div class="text-muted font-weight-bold justify-content-center">Dbl. Logarithmic</div>
-
-<div class="complexity good p-1 justify-content-center shadow-text selected-complexity effect7">O(log log n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="text-muted font-weight-bold justify-content-center">Logarithmic</div>
-
-<div class="complexity good p-1 justify-content-center shadow-text">O(log n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold  text-muted justify-content-center">Square Root</div>
-
-<div class="complexity fair p-1 justify-content-center shadow-text ">O(√n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold  text-muted justify-content-center">Linear</div>
-
-<div class="complexity fair p-1 justify-content-center shadow-text ">O(n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold text-muted justify-content-center">Linearithmic</div>
-
-<div class="complexity bad p-1 justify-content-center shadow-text ">O(n log n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold  text-muted justify-content-center">Quadratic</div>
-
-<div class="complexity terrible p-1 justify-content-center shadow-text ">_O_(_n_<sup>2</sup>)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold   text-muted justify-content-center">Exponential</div>
-
-<div class="complexity terrible p-1 justify-content-center shadow-text ">_O_(_2_<sup>n</sup>)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold text-muted">Factorial</div>
-
-<div class="complexity terrible last p-1 justify-content-center shadow-text ">O(n!)</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="hide-small">
-
-<div class="row no-gutters my-2 align-items-end">
-
-<div class="col font-weight-bold text-muted">Space:</div>
-
-<div class="col text-center">
-
-<div class="text-muted font-weight-bold justify-content-center">Constant</div>
-
-<div class="complexity amazing first p-1 justify-content-center shadow-text selected-complexity effect7">O(1)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="text-muted font-weight-bold justify-content-center">Dbl. Logarithmic</div>
-
-<div class="complexity good p-1 justify-content-center shadow-text">O(log log n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="text-muted font-weight-bold justify-content-center">Logarithmic</div>
-
-<div class="complexity good p-1 justify-content-center shadow-text">O(log n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold  text-muted justify-content-center">Square Root</div>
-
-<div class="complexity fair p-1 justify-content-center shadow-text ">O(√n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold  text-muted justify-content-center">Linear</div>
-
-<div class="complexity fair p-1 justify-content-center shadow-text ">O(n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold text-muted justify-content-center">Linearithmic</div>
-
-<div class="complexity bad p-1 justify-content-center shadow-text ">O(n log n)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold   text-muted justify-content-center">Quadratic</div>
-
-<div class="complexity terrible p-1 justify-content-center shadow-text ">_O_(_n_<sup>2</sup>)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold   text-muted justify-content-center">Exponential</div>
-
-<div class="complexity terrible p-1 justify-content-center shadow-text ">_O_(_2_<sup>n</sup>)</div>
-
-</div>
-
-<div class="col disable text-center">
-
-<div class="font-weight-bold text-muted">Factorial</div>
-
-<div class="complexity terrible last p-1 justify-content-center shadow-text ">O(n!)</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="hide-large">
-
-**Time:** <mark>O(log log n)</mark>
-
-**Space:** <mark>O(1)</mark>
-
-</div>
-
-<div class="mt-3">
-
-<div>
-
-<div class="AnswerBody">
-
-In the interpolation search algorithm, the midpoint is computed in such a way that it gives a higher probability of obtaining our search term faster. The worst case complexity of interpolation search is `_O_(_n_)`. However, its average case complexity, under the assumption that the keys are uniformly distributed, is _`O(log log N)`.
-
-It can be proven that Interpolation Search repeatedly reducing the problem to a subproblem of size that is the **square root of the original problem size**, and algorithm will terminate after _`O(log log n)`_ steps (see proof [here http://www.cs.technion.ac.il/~itai/publications/Algorithms/p550-perl.pdf)). When the values are equally dispersed into the interval this search algorithm can be extremely useful – way faster than the binary search (that divides searching space _by half_).
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div style="font-size: 14px;">
-
-<div class="mb-3 mt-2"><span class="h5">Implementation</span></div>
-
-<div>
-
-
-
-</div>
-
-</div>
-
-</nav>
-
-</div>
-
-<div class="mt-2">
-
-<div class="AnswerBody">
-
-    const interpolationSearch = (array, key) => {
-
-      // if array is empty.
-      if (!array.length) {
-        return -1;
-      }
-
-      let low = 0;
-      let high = array.length - 1;
-      while (low <= high && key >= array[low] && x <= array[high]) {
-
-        // calculate position with
-        let pos = low + Math.floor(((high - low) * (key - array[low])) / (array[high] - array[low]));
-
-        // if all elements are same then we'll have divide by 0 or 0/0
-        // which may cause NaN
-        pos = Number.isNaN(pos) ? low : pos;
-
-        if (array[pos] === key) {
-          return pos;
-        }
-
-        if (array[pos] > key) {
-          high = pos - 1;
-        } else {
-          low = pos + 1;
-        }
-
-      }
-
-      // not found.
-      return -1;
-    };
-
-</div>
-
-</div>
-
-</div>
-
-<div class="row my-2">
-
-<div><span>Source: <span>kdr2.com https://kdr2.com/promotion/1901-interpolation-search-py.html "Explain what is Interpolation Search Interview Questions Source To Answer"</span></span>   </div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 7\. Explain why complexity of Binary Search is O(log n)?
-
-</div>
-
-<div>👉🏼 Check all 24 answers https://devinterview.io/data/searching-interview-questions </div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 8\. Compare Binary Search vs Linear Search
-
-</div>
-
-<div>👉🏼 Check all 24 answers https://devinterview.io/data/searching-interview-questions </div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 9\. What is a Jump (or Block) Search?
-
-</div>
-
-<div>👉🏼 Check all 24 answers https://devinterview.io/data/searching-interview-questions </div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 10\. Which of the following algorithms would be the fastest?
-
-</div>
-
-<div>👉🏼 Check all 24 answers https://devinterview.io/data/searching-interview-questions </div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 11\. Write a program for Recursive Binary Search
-
-</div>
-
-<div>👉🏼 Check all 24 answers https://devinterview.io/data/searching-interview-questions </div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 12\. What's wrong with this Recursive Binary Search function?
-
-</div>
-
-<div>👉🏼 Check all 24 answers https://devinterview.io/data/searching-interview-questions </div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 13\. Explain how does the Sentinel Search work?
-
-</div>
-
-<div>👉🏼 Check all 24 answers https://devinterview.io/data/searching-interview-questions </div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 14\. Explain what is Ternary Search?
-
-</div>
-
-<div>👉🏼 Check all 24 answers https://devinterview.io/data/searching-interview-questions </div>
-
-</div>
-
-<div data-v-5e9078c0="" class="unit">
-
-<div>
-
-## 🔹 15\. For Binary Search why do we need round down the average? Could we round up instead?
-
-</div>
-
-<div>👉🏼 Check all 24 answers https://devinterview.io/data/searching-interview-questions </div>
-
-</div>
-
-Thanks 🙌 for reading and good luck on your next tech interview!  
-Explore 3800+ dev interview question here 👉 [Devinterview.io https://devinterview.io/)</div>
-
-</div>
