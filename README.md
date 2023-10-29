@@ -4,7 +4,7 @@
 
 Check out our carefully selected list of **basic** and **advanced** Searching questions and answers to be well-prepared for your tech interviews in 2024.
 
-![Searching Decorative Image](https://storage.googleapis.com/dev-stack-app.appspot.com/blogImg/searching.png?GoogleAccessId=firebase-adminsdk-bgeaf%40dev-stack-app.iam.gserviceaccount.com&Expires=1698606560&Signature=aLXMglwh63UZAuw9nEtJ3ivsW%2Bf27kmI9V90Gzs41QARBAe3xzxNPj6vLdZdaCqrWtd8npHsl%2FAwNQZlkSrD%2FRxAt7JB58PAhyK8nUkJteMXTF9l%2BjVW5Ueo3L330LTA5gM0ufX3MvwMolRlku50erQHaxjO1qHNla6eoj3qCuxsAIigdl8zcCNUy4hYYY459%2FlX4LlHi1I0xoo6P0ATfIqGaIQ781Iw49h9qIe%2FjvwwZ20AwkKirYjmuvJi%2FAr9RHV9znJuwurNj5w%2FMFVaS4yS4IVs3tupGKE0CKN%2Bq0lLcvDNmORUQyZHgjDTdNpxwa3s6iJhkM8CTw0SjApnkA%3D%3D)
+![Searching Decorative Image](https://firebasestorage.googleapis.com/v0/b/dev-stack-app.appspot.com/o/blogImg%2Fsearching.png?alt=media&token=e509fe56-3e7e-4845-9907-cf3e6ba1f5b1&_gl=1*12hfaqh*_ga*OTYzMjY5NTkwLjE2ODg4NDM4Njg.*_ga_CW55HF8NVT*MTY5ODYwNTk1NS4xOTAuMS4xNjk4NjA3MDUyLjYwLjAuMA..)
 
 👉🏼 You can also find all answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
 
