@@ -1,4 +1,4 @@
-# ⚫ Searching in Tech Interviews 2024: 23 Essential Questions & Answers
+# ⚫ Searching Algorithms in Tech Interviews 2024: 23 Essential Questions & Answers
 
 **Searching Algorithms** are techniques designed to locate specific items within a data set or determine the absence of such items. Examples include linear search and binary search. In coding interviews, questions on searching algorithms assess a candidate's understanding of **data retrieval** methods and their efficiency in various data structures and scenarios.
 
