@@ -1,18 +1,17 @@
-# ⚫ Searching Algorithms in Tech Interviews 2024: 23 Essential Questions & Answers
+# 59 Essential Searching Algorithms Interview Questions
 
-**Searching Algorithms** are techniques designed to locate specific items within a data set or determine the absence of such items. Examples include linear search and binary search. In coding interviews, questions on searching algorithms assess a candidate's understanding of **data retrieval** methods and their efficiency in various data structures and scenarios.
+<div>
+<p align="center">
+<a href="https://devinterview.io/questions/data-structures-and-algorithms/">
+<img src="https://firebasestorage.googleapis.com/v0/b/dev-stack-app.appspot.com/o/github-blog-img%2Fdata-structures-and-algorithms-github-img.jpg?alt=media&token=fa19cf0c-ed41-4954-ae0d-d4533b071bc6" alt="data-structures-and-algorithms" width="100%">
+</a>
+</p>
 
-Check out our carefully selected list of **basic** and **advanced** Searching questions and answers to be well-prepared for your tech interviews in 2024.
+#### You can also find all 59 answers here 👉 [Devinterview.io - Searching Algorithms](https://devinterview.io/questions/data-structures-and-algorithms/searching-algorithms-interview-questions)
 
-![Searching Decorative Image](https://firebasestorage.googleapis.com/v0/b/dev-stack-app.appspot.com/o/blogImg%2Fsearching.png?alt=media&token=e509fe56-3e7e-4845-9907-cf3e6ba1f5b1&_gl=1*12hfaqh*_ga*OTYzMjY5NTkwLjE2ODg4NDM4Njg.*_ga_CW55HF8NVT*MTY5ODYwNTk1NS4xOTAuMS4xNjk4NjA3MDUyLjYwLjAuMA..)
+<br>
 
-👉🏼 You can also find all answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
-
----
-
-## 🔹 1. What is _Linear Search_ (Sequential Search)?
-
-### Answer
+## 1. What is _Linear Search_ (Sequential Search)?
 
 **Linear Search**, also known as **Sequential Search**, is a straightforward and easy-to-understand search algorithm that works well for **small** and **unordered** datasets. However it might be inefficient for larger datasets.
 
@@ -53,12 +52,156 @@ print(f"Target value found at index: {result_index}")
 3. **Small datasets**: For limited data, a linear search is often speedy enough. Even for sorted data, it might outpace more advanced search methods.
 4. **Dynamic unsorted data**: For datasets that are continuously updated and unsorted, maintaining order for other search methods can be counterproductive.
 5. **Database queries**: In real-world databases, an SQL query lacking the right index may resort to linear search, emphasizing the importance of proper indexing.
+<br>
 
----
+## 2. Explain what is _Binary Search_.
 
-## 🔹 2. Name some _Optimization Techniques_ for _Linear Search_.
+**Binary Search** is a highly efficient searching algorithm often implemented for **already-sorted lists**, reducing the search space by 50% at every step. This method is especially useful when the list won't be modified frequently.
 
-### Answer
+### Binary Search Algorithm
+
+1. **Initialize**: Point to the start (`low`) and end (`high`) of the list.
+2. **Compare and Divide**: Calculate the midpoint (`mid`), compare the target with the element at `mid`, and adjust the search range accordingly.
+3. **Repeat**: Repeat the above step until the target is found or the search range is exhausted.
+
+### Visual Representation
+
+![Binary Search](https://firebasestorage.googleapis.com/v0/b/dev-stack-app.appspot.com/o/searching%2Fbinary-search-main.gif?alt=media&token=7ec5991e-37dd-4bed-b5fa-cc24b3f637ae&_gl=1*1n62otv*_ga*OTYzMjY5NTkwLjE2ODg4NDM4Njg.*_ga_CW55HF8NVT*MTY5NjI0NDc2Ny4xMzYuMS4xNjk2MjQ1MDYwLjU0LjAuMA..)
+
+### Complexity Analysis
+
+- **Time Complexity**: $O(\log n)$. Each iteration reduces the search space in half, resulting in a logarithmic time complexity. 
+
+- **Space Complexity**: $O(1)$. Constant space is required as the algorithm operates on the original list and uses only a few extra variables.
+
+### Code Example: Binary Search
+
+Here is the Python code:
+
+```python
+def binary_search(arr, target):
+    low, high = 0, len(arr) - 1
+    
+    while low <= high:
+        mid = (low + high) // 2  # Calculate the midpoint
+        
+        if arr[mid] == target:  # Found the target
+            return mid
+        elif arr[mid] < target:  # Target is in the upper half
+            low = mid + 1
+        else:  # Target is in the lower half
+            high = mid - 1
+    
+    return -1  # Target not found
+```
+
+### Binary Search Variations
+
+- **Iterative**: As shown in the code example above, this method uses loops to repeatedly divide the search range.
+- **Recursive**: Can be useful in certain scenarios, with the added benefit of being more concise but potentially less efficient due to the overhead of function calls and stack usage.
+
+### Practical Applications
+
+1. **Databases**: Enhances query performance in sorted databases and improves the efficiency of sorted indexes.
+2. **Search Engines**: Quickly retrieves results from vast directories of keywords or URLs.
+3. **Version Control**: Tools like 'Git' pinpoint code changes or bugs using binary search.
+4. **Optimization Problems**: Useful in algorithmic challenges to optimize solutions or verify conditions.
+5. **Real-time Systems**: Critical for timely operations in areas like air traffic control or automated trading.
+6. **Programming Libraries**: Commonly used in standard libraries for search and sort functions.
+<br>
+
+## 3. Compare _Binary Search_ vs. _Linear Search_.
+
+**Binary Search** and **Linear Search** are two fundamental algorithms for locating data in an array. Let's look at their differences.
+
+### Key Concepts
+
+- **Linear Search**: This method sequentially scans the array from the start to the end, making it suitable for both sorted and unsorted data.
+
+- **Binary Search**: This method requires a sorted array and uses a divide-and-conquer strategy, halving the search space with each iteration.
+
+### Visual Representation
+
+![Binary vs Linear Search](https://firebasestorage.googleapis.com/v0/b/dev-stack-app.appspot.com/o/searching%2Fbinary-search-gif.gif?alt=media&token=311cc083-b244-4614-bb0e-6b36eb37c3aa&_gl=1*17rzhwb*_ga*OTYzMjY5NTkwLjE2ODg4NDM4Njg.*_ga_CW55HF8NVT*MTY5NjI1MDc3My4xMzcuMS4xNjk2MjUwODU1LjQ2LjAuMA..)
+
+### Key Distinctions
+
+#### Data Requirements
+
+- **Linear Search**: Suitable for both sorted and unsorted datasets.
+- **Binary Search**: Requires the dataset to be sorted.
+
+#### Data Structure Suitability
+
+- **Linear Search**: Universal, can be applied to any data structure.
+- **Binary Search**: Most efficient with sequential access data structures like arrays or lists.
+
+#### Comparison Types
+
+- **Linear Search**: Examines each element sequentially for a match.
+- **Binary Search**: Utilizes ordered comparisons to continually halve the search space.
+
+#### Search Approach
+
+- **Linear Search**: Sequential, it checks every element until a match is found.
+- **Binary Search**: Divide-and-Conquer, it splits the search space in half repeatedly until the element is found or the space is exhausted.
+
+### Complexity Analysis
+
+- **Time Complexity**:
+  - Linear Search: $O(n)$
+  - Binary Search: $O(\log n)$
+  
+- **Space Complexity**:
+  - Linear Search: $O(1)$
+  - Binary Search: $O(1)$ for iterative and $O(\log n)$ for recursive implementations.
+
+### Key Takeaways
+
+- **Linear Search**: It's a straightforward technique, ideal for small datasets or datasets that frequently change.
+- **Binary Search**: Highly efficient for sorted datasets, especially when the data doesn't change often, making it optimal for sizable, stable datasets.
+<br>
+
+## 4. What characteristics of the data determine the choice of a _searching algorithm_?
+
+The ideal searching algorithm varies based on a number of data-specific factors. Let's take a look at those factors:
+
+### Data Characteristics
+
+1. **Size**: For small, unsorted datasets, linear search can be efficient, while for larger datasets, binary search on sorted data brings better performance.
+  
+2. **Arrangement**: Sorted or unsorted? The type of arrangement can be critical in deciding the appropriate searching method.
+
+3. **Repeatability of Elements**: When elements are non-repetitive or unique, binary search is a more fitting choice, as it necessitates sorted uniqueness.
+
+4. **Physical Layout**: In some circumstances, data systems like databases are optimized for specific methods, influencing the algorithmical choice.
+
+5. **Persistence**: When datasets are subject to frequent updates, the choice of searching algorithm can impact performance.
+
+6. **Hierarchy and Relationships**: Certain data structures like trees or graphs possess a natural hierarchy, calling for specialized search algorithms.
+
+7. **Data Integrity**: For some databases, where data consistency is a top priority, algorithms supporting atomic transactions are essential.
+
+8. **Memory Structure**: For linked lists or arrays, memory layout shortcuts can steer an algorithmic choice.
+
+9. **Metric Type**: If using multidimensional data, the chosen metric (like Hamming or Manhattan distance) can direct the search method employed.
+
+10. **Homogeneity**: The uniformity of data types can influence the algorithm choice. For heterogeneous data, specialized methods like hybrid search are considered.
+
+### Behavioral Considerations
+
+1. **Access Patterns**: If the data is frequently accessed in a specific manner, caching strategies can influence the selection of the searching algorithm.
+
+2. **Search Frequency**: If the dataset undergoes numerous consecutive searches, pre-processing steps like sorting can prove advantageous.
+
+3. **Search Type**: Depending on whether an exact or approximate match is sought, like in fuzzy matching, different algorithms might be applicable.
+
+4. **Performance Requirements**: If real-time performance is essential, algorithms with stable, short, and predictable time complexities are preferred.
+
+5. **Space Efficiency**: The amount of memory the algorithm consumes can be a decisive factor, especially in resource-limited environments.
+<br>
+
+## 5. Name some _Optimization Techniques_ for _Linear Search_.
 
 **Linear Search** is a simple searching technique. However, its efficiency can decrease with larger datasets. Let's explore techniques to enhance its performance.
 
@@ -158,12 +301,9 @@ print(f"Target value found at index: {result_index}")
            results = list(executor.map(search_chunk, chunks, [target]*4))
        return any(results)
 ```
+<br>
 
----
-
-## 🔹 3. What is _Sentinel Search_?
-
-### Answer
+## 6. What is _Sentinel Search_?
 
 **Sentinel Search**, sometimes referred to as **Move-to-Front Search** or **Self-Organizing Search**, is a variation of the linear search that optimizes search performance for frequently accessed elements.
 
@@ -216,12 +356,9 @@ target = 3
 index = sentinel_search(arr, target)
 print(f"Target found at index {index}")  # Expected Output: Target found at index 1
 ```
+<br>
 
----
-
-## 🔹 4. What are the _Drawbacks_ of _Sentinel Search_?
-
-### Answer
+## 7. What are the _Drawbacks_ of _Sentinel Search_?
 
 The **Sentinel Linear Search** slightly improves efficiency over the standard method by reducing average comparisons from roughly $2n$ to $n + 2$ using a sentinel value.
 
@@ -240,71 +377,143 @@ However, both approaches share an $O(n)$ worst-case time complexity. Despite its
 5. **Sparse Data Inefficiency**: In cases where the sentinel's position gets frequently replaced by genuine data elements, the method can lead to many unnecessary checks, diminishing its effectiveness.
 
 6. **Code Complexity vs. Efficiency**: The marginal efficiency boost from the sentinel method might not always justify the added complexity, especially when considering code readability and maintainability.
+<br>
 
----
+## 8. How does the presence of _duplicates_ affect the performance of _Linear Search_?
 
-## 🔹 5. Explain what is _Binary Search_.
-
-### Answer
-
-**Binary Search** is a highly efficient searching algorithm often implemented for **already-sorted lists**, reducing the search space by 50% at every step. This method is especially useful when the list won't be modified frequently.
-
-### Binary Search Algorithm
-
-1. **Initialize**: Point to the start (`low`) and end (`high`) of the list.
-2. **Compare and Divide**: Calculate the midpoint (`mid`), compare the target with the element at `mid`, and adjust the search range accordingly.
-3. **Repeat**: Repeat the above step until the target is found or the search range is exhausted.
-
-### Visual Representation
-
-![Binary Search](https://firebasestorage.googleapis.com/v0/b/dev-stack-app.appspot.com/o/searching%2Fbinary-search-main.gif?alt=media&token=7ec5991e-37dd-4bed-b5fa-cc24b3f637ae&_gl=1*1n62otv*_ga*OTYzMjY5NTkwLjE2ODg4NDM4Njg.*_ga_CW55HF8NVT*MTY5NjI0NDc2Ny4xMzYuMS4xNjk2MjQ1MDYwLjU0LjAuMA..)
+When dealing with **duplicates** in the data set, a **Linear Search** algorithm will generally **keep searching** even after finding a match. In such instances, processing time might be impacted, and the overall **efficiency** can vary based on different factors, such as the specific structure of the data.
 
 ### Complexity Analysis
 
-- **Time Complexity**: $O(\log n)$. Each iteration reduces the search space in half, resulting in a logarithmic time complexity. 
+- **Time Complexity**: $O(n)$ - This is because, in the worst-case scenario, every element in the list needs to be checked.
 
-- **Space Complexity**: $O(1)$. Constant space is required as the algorithm operates on the original list and uses only a few extra variables.
+- **Space Complexity**:  $O(1)$ - Linear search Algorithm uses only a constant amount of extra space.
 
-### Code Example: Binary Search
+### Code Example: Linear Search with Duplicates
 
 Here is the Python code:
 
 ```python
-def binary_search(arr, target):
-    low, high = 0, len(arr) - 1
-    
-    while low <= high:
-        mid = (low + high) // 2  # Calculate the midpoint
-        
-        if arr[mid] == target:  # Found the target
-            return mid
-        elif arr[mid] < target:  # Target is in the upper half
-            low = mid + 1
-        else:  # Target is in the lower half
-            high = mid - 1
-    
-    return -1  # Target not found
+def linear_search_with_duplicates(arr, target):
+    for i, val in enumerate(arr):
+        if val == target:
+            return i  # Returns the first occurrence found
+    return -1
+```
+<br>
+
+## 9. Implement an _Order-Agnostic Linear Search_ that works on _sorted_ and _unsorted arrays_.
+
+### Problem Statement
+
+The **Order-Agnostic Linear Search** algorithm searches arrays that can either be **in ascending or descending order**. The goal is to find a specific target value.
+
+### Solution
+
+The **Order-Agnostic Linear Search** is quite straightforward. Here's how it works:
+
+1. Begin with the assumption that the array could be sorted in any order.
+2. Perform a linear search from the beginning to the end of the array.
+3. Check each element against the target value.
+4. If an item matches the target, return the index.
+5. If the end of the array is reached without finding the target, return -1.
+
+#### Complexity Analysis
+
+- **Time Complexity**: $O(N)$ - This is true for both the worst and average cases.
+- **Space Complexity**: $O(1)$ - The algorithm uses a fixed amount of space, irrespective of the array's size.
+
+#### Implementation
+
+Here is the Python code:
+
+```python
+def order_agnostic_linear_search(arr, target):
+    n = len(arr)
+
+    # Handle the empty array case
+    if n == 0:
+        return -1
+
+    # Determine the array's direction
+    is_ascending = arr[0] < arr[n-1]
+
+    # Perform linear search based on the array's direction
+    for i in range(n):
+        if (is_ascending and arr[i] == target) or (not is_ascending and arr[n-1-i] == target):
+            return i if is_ascending else n-1-i
+
+    # The target is not in the array
+    return -1
+```
+<br>
+
+## 10. Modify _Linear Search_ to perform on a _multi-dimensional array_.
+
+### Problem Statement
+
+The task is to **adapt** the **Linear Search** algorithm so it can perform on a **multi-dimensional** array.
+
+### Solution
+
+Performing a Linear Search on a multi-dimensional array involves systematically walking through its elements in a methodical manner, usually by using nested loops.
+
+Let's first consider an illustration:
+
+Suppose you have the following 3x3 grid of numbers:
+
+$$
+\begin{array}{ccc}
+2 & 5 & 8 \\
+3 & 6 & 9 \\
+4 & 7 & 10
+\end{array}
+$$
+
+To search for the number 6:
+
+1. Begin with the first row from left to right $(2, 5, 8)$.
+2. Move to the second row $(3, 6, 9)$.
+3. Here, you find the number 6 in the second position.
+
+The process can be codified to work with `n`-dimensional arrays, allowing you to perform a linear $O(n)$ search.
+
+#### Complexity Analysis
+
+- Time Complexity: $O(N)$ where $N$ is the total number of elements in the array.
+- Space Complexity: $O(1)$. No additional space is used beyond a few variables for bookkeeping.
+
+#### Implementation
+
+Here is the Python code for searching through a 2D array:
+
+```python
+def linear_search_2d(arr, target):
+    rows = len(arr)
+    cols = len(arr[0])
+
+    for r in range(rows):
+        for c in range(cols):
+            if arr[r][c] == target:
+                return (r, c)
+    return (-1, -1)  # If the element is not found
+
+# Example usage
+arr = [
+    [2, 5, 8],
+    [3, 6, 9],
+    [4, 7, 10]
+]
+target = 6
+print(linear_search_2d(arr, target))  # Output: (1, 1)
 ```
 
-### Binary Search Variations
+#### Algorithm Optimizations
 
-- **Iterative**: As shown in the code example above, this method uses loops to repeatedly divide the search range.
-- **Recursive**: Can be useful in certain scenarios, with the added benefit of being more concise but potentially less efficient due to the overhead of function calls and stack usage.
+While the standard approach involves visiting every element, sorting the data beforehand can enable binary search in each row, resulting in a strategy resembling the **Binary Search algorithm**.
+<br>
 
-### Practical Applications
-
-1. **Databases**: Enhances query performance in sorted databases and improves the efficiency of sorted indexes.
-2. **Search Engines**: Quickly retrieves results from vast directories of keywords or URLs.
-3. **Version Control**: Tools like 'Git' pinpoint code changes or bugs using binary search.
-4. **Optimization Problems**: Useful in algorithmic challenges to optimize solutions or verify conditions.
-5. **Real-time Systems**: Critical for timely operations in areas like air traffic control or automated trading.
-6. **Programming Libraries**: Commonly used in standard libraries for search and sort functions.
-
----
-
-## 🔹 6. Explain why complexity of _Binary Search_ is _O(log n)_.
-
-### Answer
+## 11. Explain why complexity of _Binary Search_ is _O(log n)_.
 
 The **Binary Search** algorithm is known for its efficiency, often completing in $O(\log n)$—also known as **logarithmic**—time.
 
@@ -320,12 +529,9 @@ Therefore, with each step, the algorithm roughly reduces the search space in **h
 ### Visual Representation
 
 ![Binary Search Graphical Representation](https://i.stack.imgur.com/spHFh.png)
+<br>
 
----
-
-## 🔹 7. Compare _Recursive_ vs. _Iterative Binary Search_.
-
-### Answer
+## 12. Compare _Recursive_ vs. _Iterative Binary Search_.
 
 Both **Recursive** and **Iterative** Binary Search leverage the **divide-and-conquer** strategy to search through sorted data. Let's look at their differences in implementation.
 
@@ -389,133 +595,163 @@ def binary_search_recursive(arr, target, low=0, high=None):
 array = [1, 3, 5, 7, 9, 11]
 print(binary_search_recursive(array, 7))  # Output: 3
 ```
+<br>
 
----
-## 🔹 8. In _Binary Search_, why _Round Down_ the midpoint instead of _Rounding Up_?
+## 13. In _Binary Search_, why _Round Down_ the midpoint instead of _Rounding Up_?
 
-### Answer
+Both **rounding up** and **rounding down** are acceptable in binary search. The essence of the method lies in the distribution of elements in relation to our guess:
 
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
+- For an odd number of remaining elements, there are $(n-1)/2$ elements on each side of our guess.
+- For an even number, there are $n/2$ elements on one side and $n/2-1$ on the other. The method of rounding determines which side has the smaller portion.
 
----
+Rounding consistently, especially rounding down, helps in avoiding **overlapping search ranges** and possible **infinite loops**. This ensures an even or near-even distribution of elements between the two halves, streamlining the search. This balance becomes particularly noteworthy when the total number of elements is **even**.
 
-## 🔹 9. Compare _Binary Search_ vs. _Linear Search_.
+### Code Example: Rounding Down in Binary Search
 
-### Answer
+Here is the Python code:
 
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
+```python
+def binary_search(arr, target):
+    low, high = 0, len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2  # Rounding down
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+```
+<br>
 
----
+## 14. Write a _Binary Search_ algorithm that finds the first occurrence of a given value.
 
-## 🔹 10. What is _Interpolation Search_?
+### Problem Statement
 
-### Answer
+The goal is to use the **Binary Search** algorithm to find the **first occurrence** of a given value. 
 
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
+### Solution
 
----
+We can modify the standard binary search algorithm to find the `first` occurrence of the target value by continuing the search in the `left` partition, **even** when the midpoint element matches the target. By doing this, we ensure that we find the leftmost occurrence.
 
-## 🔹 11. Provide an example where _Interpolation Search_ is less efficient than _Binary Search_.
+Consider the array:
 
-### Answer
+$$
+$$
+&\text{Array:} & 2 & 4 & 10 & 10 & 10 & 18 & 20 \\
+&\text{Index:} & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\
+$$
+$$
 
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
+#### Algorithm Steps
 
----
+1. Initialize `start` and `end` pointers. Perform the usual binary search, calculating the `mid` point.
+2. Evaluate both left and right subarrays:
+   - If `mid`'s value is less than the target, explore the **right subarray**.
+   - If `mid`'s value is greater than or equal to the target, explore the **left subarray**.
+3. Keep track of the **last successful** iteration (`result`). This denotes the last position where the target was found, hence updating the possible earliest occurrence.
+4. Repeat steps 1-3 until `start` crosses or equals `end`. 
 
-## 🔹 12. What is _Jump Search_ (Block Search) technique?
+#### Complexity Analysis
 
-### Answer
+- **Time Complexity**: $O(\log n)$ - The search space halves with each iteration.
+- **Space Complexity**: $O(1)$ - It is a constant as we are only using a few variables.
 
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
+#### Implementation
 
----
+Here is the Python code:
 
-## 🔹 13. Explain the rationale behind choosing the _Optimal Block Size_ for _Jump Search_.
+```python
+def first_occurrence(arr, target):
+    start, end = 0, len(arr) - 1
+    result = -1
 
-### Answer
+    while start <= end:
+        mid = start + (end - start) // 2
 
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
+        if arr[mid] == target:
+            result = mid
+            end = mid - 1
+        elif arr[mid] < target:
+            start = mid + 1
+        else:
+            end = mid - 1
 
----
+    return result
 
-## 🔹 14. When _Jump Search_ is preferable over _Binary Search_?
+# Example
+arr = [2, 4, 10, 10, 10, 18, 20]
+target = 10
+print("First occurrence of", target, "is at index", first_occurrence(arr, target))
+```
+<br>
 
-### Answer
+## 15. How would you apply _Binary Search_ to an array of objects sorted by a specific key?
 
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
+Let's explore how **Binary Search** can be optimized for sorted arrays of objects.
 
----
+### Core Concepts
 
-## 🔹 15. What is _Ternary Search_?
+**Binary Search** works by repeatedly dividing the search range in half, based on the comparison of a target value with the middle element of the array.
 
-### Answer
+For using Binary Search on sorted arrays of objects, the **specific key** according to which objects are sorted must also be considered when comparing target and middle values.
 
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
+For example, if $\text{Key}(\text{obj}_1) < \text{Key}(\text{obj}_2)$ is true, then $\text{obj}_1$ comes before $\text{obj}_2$ in the sorted array according to the key.
 
----
+### Algorithm Steps
 
-## 🔹 16. What are the advantages of _Binary Search_ over _Ternary Search_?
+1. **Initialize** two pointers, `start` and `end`, for the search range. Set them to the start and end of the array initially.
 
-### Answer
+2. **Middle Value**: Calculate the index of the middle element. Then, retrieve the key of the middle object.
 
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
+3. **Compare with Target**: Compare the key of the middle object with the target key. Based on the comparison, adjust the range pointers:
+   - If the key of the middle object is equal to the target key, you've found the object. End the search.
+   - If the key of the middle object is smaller than the target key, move the `start` pointer to the next position after the middle.
+   - If the key of the middle object is larger than the target key, move the `end` pointer to the position just before the middle.
 
----
+4. **Re-Evaluate Range**: After adjusting the range pointers, check if the range is valid. If so, repeat the process with the updated range. Otherwise, the search ends.
 
-## 🔹 17. Explain the _Breadth-First Search (BFS) traversing method.
+5. **Output**: Return the index of the found object if it exists in the array. If not found, return a flag indicating absence.
 
-### Answer
+### Code Example: Binary Search on Objects
 
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
+Here is the Python code:
 
----
+```python
+def binary_search_on_objects(arr, target_key):
+    start, end = 0, len(arr) - 1
+    
+    while start <= end:
+        mid = (start + end) // 2
+        mid_obj = arr[mid]
+        mid_key = getKey(mid_obj)
+        
+        if mid_key == target_key:
+            return mid  # Found the target at index mid
+        elif mid_key < target_key:
+            start = mid + 1  # Move start past mid
+        else:
+            end = mid - 1  # Move end before mid
+            
+    return -1  # Target not found
+```
 
-## 🔹 18. Explain the _Depth-First Search_ algorithm.
+### Complexities
 
-### Answer
+- **Time Complexity**: $O(\log n)$ where $n$ is the number of objects in the array.
 
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
+- **Space Complexity**: $O(1)$, as the algorithm is using a constant amount of extra space.
+<br>
 
----
 
-## 🔹 19. What is _Exponential Search_ (Doubling/Galloping)?
 
-### Answer
+#### Explore all 59 answers here 👉 [Devinterview.io - Searching Algorithms](https://devinterview.io/questions/data-structures-and-algorithms/searching-algorithms-interview-questions)
 
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
+<br>
 
----
-
-## 🔹 20. Explain the rationale behind using _Binary Search_ on a _Doubly Linked List_.
-
-### Answer
-
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
-
----
-
-## 🔹 21. Explain what is _Fibonacci Search Technique_.
-
-### Answer
-
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
-
----
-
-## 🔹 22. Identify potential issues in this _Recursive Binary Search_ implementation.
-
-### Answer
-
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
-
----
-
-## 🔹 23. Choose _The Fastest Algorithm_ for the given scenario.
-
-### Answer
-
-👉🏼 Check out all 23 answers here: [Devinterview.io - Searching](https://devinterview.io/data/searching-interview-questions)
-
----
+<a href="https://devinterview.io/questions/data-structures-and-algorithms/">
+<img src="https://firebasestorage.googleapis.com/v0/b/dev-stack-app.appspot.com/o/github-blog-img%2Fdata-structures-and-algorithms-github-img.jpg?alt=media&token=fa19cf0c-ed41-4954-ae0d-d4533b071bc6" alt="data-structures-and-algorithms" width="100%">
+</a>
+</p>
 
