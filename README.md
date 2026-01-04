@@ -1,4 +1,4 @@
-# 59 Essential Searching Algorithms Interview Questions in 2025
+# 59 Essential Searching Algorithms Interview Questions in 2026
 
 <div>
 <p align="center">
